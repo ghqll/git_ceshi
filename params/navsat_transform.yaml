@@ -1,0 +1,44 @@
+navsat_transform_node:
+  ros__parameters:
+    # The prefix for all TF frames published by this node.
+    tf_prefix: "wamv"
+
+    # Frequency of the main run loop
+    frequency: 10.0
+
+    # Delay time, in seconds, before we calculate the transform from the UTM frame to your world frame. This is especially
+    # important if you have use_odometry_yaw set to true. Defaults to 0.
+    delay: 3.0
+
+    # Magnetic declination in radians
+    magnetic_declination_radians: 0.0
+
+    # If this is true, broadcast the UTM to world frame transform
+    broadcast_cartesian_transform: true
+
+    # If this is true, the node will wait for the datum to be set before processing GPS data
+    wait_for_datum: false
+
+    # If this is true, use yaw from odometry instead of IMU data
+    use_odometry_yaw: true
+
+    # Offset to apply to IMU yaw angle in radians
+    yaw_offset: 0.0
+
+    # If this is true, publish filtered GPS data
+    publish_filtered_gps: true
+
+    # If this is true, the altitude is set to 0 in the output odometry message. Defaults to false.
+    zero_altitude: false
+
+    # If this is true, the transform world_frame->utm transform is broadcast for use by other nodes. Defaults to false.
+    broadcast_utm_transform: false
+
+    # If this is true, the utm->world_frame transform will be published instead of the world_frame->utm transform. 
+    # Note that broadcast_utm_transform still has to be enabled. Defaults to false.
+    broadcast_utm_transform_as_parent_frame: false
+
+    # Instead of using the first GPS location and IMU-based heading for the local-frame origin, users can specify the
+    # origin (datum) using this parameter. The fields in the parameter represent latitude and longitude in decimal degrees,
+    # and heading in radians. As navsat_transform_node assumes an ENU standard, a 0 heading corresponds to east.
+    datum: [-33.722769, 150.673990, 1.165953]

@@ -1,0 +1,85 @@
+### ukf config file ###
+ukf_filter_node:
+    ros__parameters:
+        # 过滤器的输出频率
+        frequency: 30.0
+
+        # 传感器超时周期
+        sensor_timeout: 0.1
+
+        # 是否使用2D模式（如果不需要3D信息，设置为true）
+        two_d_mode: false
+
+        # 转换时间偏移
+        transform_time_offset: 0.0
+
+        # 转换超时
+        transform_timeout: 0.0
+
+        # 是否打印诊断信息
+        print_diagnostics: true
+
+        # 调试设置
+        debug: false
+        debug_out_file: /path/to/debug/file.txt
+
+        # 允许旧的测量数据导致状态重新发布
+        permit_corrected_publication: false
+
+        # 是否发布加速度状态
+        publish_acceleration: false
+
+        # 是否发布tf
+        publish_tf: true
+
+        # 坐标系设置
+        map_frame: map
+        odom_frame: /wamv/odom
+        base_link_frame: wamv/wamv/base_link
+        world_frame: /wamv/odom
+
+       
+        imu0: /wamv/sensors/imu/imu/data
+
+
+        # IMU 配置
+        imu0_config: [false, false, false, true, true, true, false, false, false, true, true, true, true, true, true]
+        imu0_queue_size: 5
+        imu0_differential: false
+        imu0_relative: true
+        imu0_pose_rejection_threshold: 0.8
+        imu0_twist_rejection_threshold: 0.8
+        imu0_linear_acceleration_rejection_threshold: 0.8
+        imu0_remove_gravitational_acceleration: true
+
+        # 控制输入设置（如果有）
+        use_control: false
+        control_timeout: 0.2
+        control_config: [true, false, false, false, false, true]
+        acceleration_limits: [1.3, 0.0, 0.0, 0.0, 0.0, 3.4]
+        deceleration_limits: [1.3, 0.0, 0.0, 0.0, 0.0, 4.5]
+        acceleration_gains: [0.8, 0.0, 0.0, 0.0, 0.0, 0.9]
+        deceleration_gains: [1.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+
+        # 过程噪声协方差矩阵
+        process_noise_covariance: [0.05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.06, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.03, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.03, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.06, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.025, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.025, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.04, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.02, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.015]
+
+        # 初始状态估计协方差矩阵
+        initial_estimate_covariance: [1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9]
+
+        # UKF 特有参数
+        alpha: 0.001
+        kappa: 0.0
+        beta: 2.0
